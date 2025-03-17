@@ -1,7 +1,47 @@
 # My Application
-
+OutfitGenie
 ## Topic: 
-unknown yet
+OutfitGenie este o aplicație pentru organizarea garderobei, care permite utilizatorilor să înregistreze articolele vestimentare și să primească sugestii personalizate de outfit-uri bazate pe vreme, stil, mood și preferințe individuale. De asemenea, aplicația include funcționalități avansate pentru planificarea ținutelor și gestionarea uzurii hainelor.
+
+Funcționalități Principale
+
+1. Înregistrare și Personalizare Profil
+
+Crearea unui cont prin nume și parolă.
+
+Setarea detaliilor personale (sex, înălțime, greutate) pentru recomandări mai precise.
+
+Selectarea stilului preferat (Casual, Elegant, Sport, Business, Streetwear etc.).
+
+Configurarea preferințelor cromatice (culori favorite și culori de evitat).
+
+Stabilirea nivelului de confort termic pentru sugestii adecvate condițiilor meteo.
+
+2. Catalogarea Hainelor
+
+Adăugare manuală: încărcarea unei imagini și completarea detaliilor despre articol.
+
+Scanare cod de bare: extragerea automata a informațiilor despre produs, dacă sunt disponibile.
+
+3. Recomandări de Outfit-uri
+
+Condiții meteo: selecție automată de haine potrivite vremii curente.
+
+Mood-ul utilizatorului: recomandări personalizate bazate pe starea aleasă.
+
+Evenimente programate: planificarea ținutelor pentru ocazii specifice.
+
+Restricții de combinații: utilizatorul poate seta articole care nu se potrivesc între ele.
+
+4. Funcționalități Suplimentare
+
+Auto-rotire a hainelor: evidențiază articolele cel mai des purtate pentru diversificare.
+
+Mod Capsule Wardrobe: sugerează un set minimalist de articole pentru călătorii.
+
+Wishlist & Shopping Assistant: recomandă haine care completează garderoba existentă.
+
+Partajare outfit: utilizatorii pot distribui ținutele și primi feedback.
 
 ## Description
 This is a full-stack application that uses:
