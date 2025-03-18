@@ -21,8 +21,6 @@ Stabilirea nivelului de confort termic pentru sugestii adecvate condițiilor met
 
 Adăugare manuală: încărcarea unei imagini și completarea detaliilor despre articol.
 
-Scanare cod de bare: extragerea automata a informațiilor despre produs, dacă sunt disponibile.
-
 3. Recomandări de Outfit-uri
 
 Condiții meteo: selecție automată de haine potrivite vremii curente.
@@ -33,15 +31,6 @@ Evenimente programate: planificarea ținutelor pentru ocazii specifice.
 
 Restricții de combinații: utilizatorul poate seta articole care nu se potrivesc între ele.
 
-4. Funcționalități Suplimentare
-
-Auto-rotire a hainelor: evidențiază articolele cel mai des purtate pentru diversificare.
-
-Mod Capsule Wardrobe: sugerează un set minimalist de articole pentru călătorii.
-
-Wishlist & Shopping Assistant: recomandă haine care completează garderoba existentă.
-
-Partajare outfit: utilizatorii pot distribui ținutele și primi feedback.
 
 ## Description
 This is a full-stack application that uses:
