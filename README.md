@@ -1,9 +1,12 @@
 # My Application
-ChromeGlam
+
+ChromaGlam
+
 ## Topic: 
+
 ChromaGlam este o aplicație pentru organizarea garderobei, care permite utilizatorilor să înregistreze articolele vestimentare și să primească sugestii personalizate de outfit-uri bazate pe vreme, stil, mood și preferințe individuale. De asemenea, aplicația include funcționalități avansate pentru planificarea ținutelor și gestionarea uzurii hainelor.
 
-Funcționalități Principale
+# Funcționalități Principale
 
 1. Înregistrare și Personalizare Profil
 
