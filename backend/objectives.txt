@@ -1,0 +1,46 @@
+
+1. MODEL AI PENTRU MATCHING DE OUTFIT-URI:
+
+Optiunea A:
+
+Vom folosi FashionBert pentru parte de AI care se ocupa cu potrivirea
+obiectelor vestimentare selectate.
+
+Detalii FashionBert:
+- varianta specializata pe vestimentatie a lui BERT
+- BERT = Bidirectional Encoder Representations from Tranfosrmers
+- deci vom folosi un transformer pentru a potrivi un format textual
+cu o imagine (o descriere cu un obiect vestimentar)
+- intai modelul extrage trasaturi din imagini de ex culoare, forma, material
+apoi anaizeaza descrierea outfit-ului de ex tricou alb casual
+- astfel modelul invata relatiile dintre haine
+
+Optiunea B:
+
+Vom folosi Fashion-CLIP pentru partea de AI care se ocupa cu
+potrivirea obiectelor vestimentare selectate.
+
+Detalii Fashion-CLIP:
+
+Fashion-CLIP combina tehnologiile CLIP (Contrastive Language-Image
+Pretraining) si transfer learning pentru a crea un model capabil
+sa inteleaga si sa asocieze atat imagini, cat si texte referitoare
+la imbracaminte.
+
+CLIP este un model care invata relatiile intre imagini si texte
+in mod simultan, folosind un encoder de imagini si unul de texte
+pentru a le transforma intr-o reprezentare comuna intr-un spatiu
+vectorial.
+
+Prin aceasta abordare, Fashion-CLIP poate intelege descrierile
+vestimentare (de exemplu, „rochie rosie eleganta”) si le poate
+potrivi cu imagini de articole vestimentare din baza de date.
+
+Mai exact, modelul poate identifica trasaturi precum stilul,
+culoarea, materialul si tipul de imbracaminte si poate asocia
+descrierea unui outfit cu imagini ale articolelor vestimentare
+relevante din colectia utilizatorului.
+
+Astfel, Fashion-CLIP poate oferi recomandari de outfit-uri
+bazate pe selectii de haine sau poate cauta articole care se
+potrivesc unei descrieri textuale sau unei imagini date.
