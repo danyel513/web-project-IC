@@ -17,11 +17,11 @@ public class UserService
         this.userRepository = userRepository;
     }
 
-    public User registerUser(String name, String username,String email, String password)
+    public void registerUser(String name, String username,String email, String password)
     {
         String hashedPassword = PasswordEncryption.hashPassword(password);
         User user = new User(name,username,email,hashedPassword);
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
     public User update(long id, String name,String username, String email, String password)
