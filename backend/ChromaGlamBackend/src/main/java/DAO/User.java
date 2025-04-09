@@ -1,12 +1,33 @@
 package DAO;
 
+import jakarta.persistence.*;
+import jakarta.persistence.GenerationType;
+import lombok.*;
+
+@Entity
+@Table(name = "users")
+@Data
+
 public class User
 {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
+    private long user_id;
+
+    @Column(name = "name")
     private String name;
+    @Column(name = "username")
     private String username;
+    @Column(name = "email")
     private String email;
+    @Column(name = "preferences")
+    private String preferences;
+    @Column(name = "password")
     private String password;
+
+    @Column(name = "avatar")
+    private byte[] avatar;
 
     public User() {}
 
@@ -20,40 +41,7 @@ public class User
     }
 
 
-    public String getName()
-    {
-        return this.name;
-    }
 
-    public String getUsername()
-    {
-        return this.username;
-    }
-
-    public String getEmail()
-    {
-        return this.email;
-    }
-
-    public int getId()
-    {
-        return this.id;
-    }
-
-    public void setPassword(String password)
-    {
-        this.password = password;
-    }
-
-    public void setName(String name)
-    {
-        this.name = name;
-    }
-
-    public void setUsername(String username)
-    {
-        this.username = username;
-    }
 
 
 
