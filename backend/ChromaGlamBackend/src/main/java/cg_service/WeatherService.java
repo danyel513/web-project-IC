@@ -14,7 +14,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import org.json.JSONObject;
+import org.springframework.stereotype.Service;
 
+// adding a "@Service" tag the Weather Service will be a singleton
+@Service
 public class WeatherService
 {
     // constants
@@ -75,7 +78,7 @@ public class WeatherService
         }
         catch (Exception e)
         {
-            System.err.println("Eroare la preluarea datelor meteo: " + e.getMessage());
+            System.err.println("An error has occurred while connecting to the API that provides weather information: " + e.getMessage());
             e.printStackTrace();
             city = "Unknown";
             country = "Unknown";
@@ -87,7 +90,7 @@ public class WeatherService
             windGusts = 0;
             uvIndex = 0;
             isDay = false;
-            weatherDescription = "Indisponibil";
+            weatherDescription = "Unavailable";
         }
     }
 
