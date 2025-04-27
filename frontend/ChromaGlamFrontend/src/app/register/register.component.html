@@ -1,0 +1,22 @@
+<div class="page-container">
+  <div class="logo">
+    <span class="l1">C</span><span class="l2">h</span><span class="l3">r</span><span class="l4">o</span>
+    <span class="l5">m</span><span class="l6">a</span><span class="l7">G</span><span class="l8">l</span>
+    <span class="l9">a</span><span class="l10">m</span>
+  </div>
+
+  <div class="register-box">
+    <h2>Create your account</h2>
+    <p>Join ChromaGlam and discover your best outfits!</p>
+
+    <form (ngSubmit)="register()">
+      <input type="text" placeholder="Name" [(ngModel)]="user.name" name="name" required>
+      <input type="text" placeholder="Username" [(ngModel)]="user.username" name="username" required>
+      <input type="email" placeholder="Email" [(ngModel)]="user.email" name="email" required>
+      <input type="text" placeholder="Preferences" [(ngModel)]="user.preferences" name="preferences" required>
+      <input type="password" placeholder="Password" [(ngModel)]="user.password" name="password" required>
+
+      <button type="submit">Register</button>
+    </form>
+  </div>
+</div>

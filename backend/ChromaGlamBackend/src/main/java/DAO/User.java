@@ -38,8 +38,8 @@ public class User
         this.password = password;
     }
 
-
     // getters and setters
+
 
     public long getUser_id() {
         return user_id;
