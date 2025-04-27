@@ -1,18 +1,10 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { RegisterComponent } from './register/register.component'; // <-- import your RegisterComponent
-import { RecommendationComponent } from './recommendation/recommendation.component';
+import { Routes } from '@angular/router';
+import {RegisterComponent} from './register/register.component';
 
 
+// add here all routes to the components:
 export const routes: Routes = [
-  { path: '', redirectTo: '/register', pathMatch: 'full' }, // default redirect
- // { path: 'register', component: RegisterComponent },
-  { path: 'recommendations', component: RecommendationComponent }
+  { path: 'register', component: RegisterComponent }, // route to register comp
+  { path: '**', redirectTo: '' } // general route
 
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
