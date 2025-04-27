@@ -1,0 +1,43 @@
+<div class="container" @fadeIn>
+
+  <div class="logo">
+    <span class="l1">C</span>
+    <span class="l2">h</span>
+    <span class="l3">r</span>
+    <span class="l4">o</span>
+    <span class="l5">m</span>
+    <span class="l6">a</span>
+    <span class="l7">G</span>
+    <span class="l8">l</span>
+    <span class="l9">a</span>
+    <span class="l10">m</span>
+  </div>
+
+  <br>
+  <br>
+
+  <div class="card">
+    <h2>Welcome back!</h2>
+    <p>Please sign in to continue...</p>
+
+    <form (submit)="signIn(); $event.preventDefault()">
+      <input
+        type="text"
+        [(ngModel)]="username"
+        name="username"
+        placeholder="Username"
+        required
+      />
+      <input
+        type="password"
+        [(ngModel)]="password"
+        name="password"
+        placeholder="Password"
+        required
+      />
+      <br><br>
+      <button type="submit">Sign In</button>
+      <div class="error" *ngIf="error">{{ error }}</div>
+    </form>
+  </div>
+</div>

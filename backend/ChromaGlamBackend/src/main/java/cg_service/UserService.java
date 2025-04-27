@@ -24,7 +24,7 @@ public class UserService
         userRepository.save(user);
     }
 
-    public User update(long id, String name,String username, String email, String password)
+    public User update(long id, String name, String username, String email, String password)
     {
         Optional<User> userUp = userRepository.findById(id);
         if(userUp.isPresent())

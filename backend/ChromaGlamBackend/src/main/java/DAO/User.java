@@ -7,14 +7,14 @@ import lombok.*;
 @Entity
 @Table(name = "users")
 @Data
-
+@Setter
+@Getter
 public class User
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private long user_id;
-
     @Column(name = "name")
     private String name;
     @Column(name = "username")
@@ -25,12 +25,10 @@ public class User
     private String preferences;
     @Column(name = "password")
     private String password;
-
     @Column(name = "avatar")
     private byte[] avatar;
 
     public User() {}
-
 
     public User(String name,String username, String password, String email)
     {
@@ -40,8 +38,9 @@ public class User
         this.password = password;
     }
 
+    // getters and setters
 
-    //getters and setters
+
     public long getUser_id() {
         return user_id;
     }
@@ -97,11 +96,4 @@ public class User
     public void setAvatar(byte[] avatar) {
         this.avatar = avatar;
     }
-
-
-
-
-
-
-
 }
