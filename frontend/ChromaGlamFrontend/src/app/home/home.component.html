@@ -1,0 +1,61 @@
+<div class="home-container">
+  <header class="header">
+    <div class="logo">
+      <span class="l1">C</span>
+      <span class="l2">h</span>
+      <span class="l3">r</span>
+      <span class="l4">o</span>
+      <span class="l5">m</span>
+      <span class="l6">a</span>
+      <span class="l7">G</span>
+      <span class="l8">l</span>
+      <span class="l9">a</span>
+      <span class="l10">m</span>
+    </div>
+    <div class="profile">
+      <i class="profile-icon"></i>
+      <br><br>
+      <div class="username">Hi, Username</div>
+      <br>
+      <button class="action-btn" type="button" (click)="navigateToSignin()" >SWITCH USER</button>
+    </div>
+  </header>
+
+  <hr>
+
+  <main class="main-content">
+    <div class="home-content">
+      <div class="welcome-text">
+        <i>Welcome back,</i>
+        <p>What would you like to wear today?</p>
+        <button class="see-outfits-btn" type="button" (click)="navigateToRecommendations()">SEE OUTFITS</button>
+        <p class="instruction-text">Click the button to see the recommended outfits for the day.</p>
+      </div>
+
+      <div class="action-buttons">
+        <button class="action-btn">ADD ITEM</button>
+        <button class="action-btn">REMOVE ITEM</button>
+        <button class="action-btn">VIEW ITEMS</button>
+        <button class="action-btn">MODIFY PREFERENCES</button>
+      </div>
+    </div>
+
+    <div class="tips-section">
+      <div class="image-placeholder"></div>
+      <div class="tips-box">
+        <div class="tips-title">Tips of the day</div>
+        <hr>
+        <div class="tips-content">
+          <button class="arrow-btn" type="button" (click)="prevTip()">&#8592;</button>
+
+          <div class="tips-text">
+            {{ tips[currentTipIndex] }}
+          </div>
+
+          <button type="button" class="arrow-btn" (click)="nextTip()">&#8594;</button>
+        </div>
+      </div>
+      <div class="image-placeholder"></div>
+    </div>
+  </main>
+</div>

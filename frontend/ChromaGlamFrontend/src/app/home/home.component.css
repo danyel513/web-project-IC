@@ -1,0 +1,207 @@
+/* background and general settings */
+.home-container {
+  background-color: #121212;
+  color: #e0e0e0;
+  min-height: 150vh;
+  max-width: 1200px;
+  padding: 4rem;
+  margin: 0 auto;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background-color: gray;
+  margin: 1rem 0;
+}
+
+/* header section */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 4.5rem;
+  margin-bottom: 2rem;
+  font-weight: bold;
+}
+
+.logo .l1 { color: #99CCFF; }
+.logo .l2 { color: #66B2FF; }
+.logo .l3 { color: #3399FF; }
+.logo .l4 { color: #007FFF; }
+.logo .l5 { color: #004C99; }
+.logo .l6 { color: #004C99; }
+.logo .l7 { color: #808080; }
+.logo .l8 { color: #808080; }
+.logo .l9 { color: #999999; }
+.logo .l10 { color: #B3B3B3; }
+
+.blue {
+  color: #2196f3;
+}
+
+.gray {
+  color: #ccc;
+}
+
+.underline {
+  width: 100px;
+  height: 2px;
+  background-color: #aaa;
+  margin-top: 4px;
+}
+
+/* profile section */
+.profile {
+  text-align: center;
+}
+
+.profile-icon {
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.username {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+}
+
+/* main content */
+.main-content {
+  margin-top: 3rem;
+}
+
+
+.home-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.welcome-text {
+  flex: 1;
+}
+
+.welcome-text i {
+  font-size: 1.2rem;
+}
+
+.welcome-text p {
+  margin: 1rem 0;
+}
+
+
+.see-outfits-btn {
+  background-color: transparent;
+  border: 1px solid #2196f3;
+  color: #2196f3;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  width: 200px;
+  font-family: 'Courier New', Courier, monospace;
+  border-radius: 5px;
+}
+
+.see-outfits-btn:hover {
+  background-color: rgba(110, 160, 241, 0.1);
+}
+
+
+.instruction-text {
+  font-size: 0.8rem;
+  margin-bottom: 2rem;
+}
+
+/* action buttons */
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 200px;
+  flex-shrink: 0;
+  border-radius: 5px;
+}
+
+.action-btn {
+  background-color: transparent;
+  border: 1px solid #888;
+  color: #ccc;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-family: 'Courier New', Courier, monospace;
+  transition: background 0.3s;
+  border-radius: 5px;
+}
+
+.action-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* tips section */
+.tips-section {
+  margin-top: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.image-placeholder {
+  width: 150px;
+  height: 150px;
+  background-color: #1e1e1e;
+  border: 1px dashed #555;
+}
+
+.tips-box {
+  background-color: #1e1e1e;
+  border: 1px solid #555;
+  padding: 1rem;
+  width: 350px;
+  text-align: center;
+}
+
+.tips-title {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.tips-text {
+  font-size: 0.9rem;
+}
+
+.tips-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.arrow-btn {
+  background-color: transparent;
+  border: none;
+  color: #ccc;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.arrow-btn:hover {
+  color: #2196f3;
+}
+
+.tips-text {
+  max-width: 200px;
+  text-align: center;
+  font-size: 0.9rem;
+}

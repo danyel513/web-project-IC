@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -16,7 +17,7 @@ export class SignInComponent {
   password = '';
   error = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   async signIn() {
     const userCredentials = {
@@ -24,8 +25,20 @@ export class SignInComponent {
       password: this.password,
     };
 
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
     try {
-      const response = await firstValueFrom(this.http.post('http://localhost:8080/api/users/login', userCredentials));
+      console.log(userCredentials.username);
+      console.log(userCredentials.password);
+      const response = await firstValueFrom(
+        this.http.post(
+          'http://localhost:8080/api/users/login',
+          userCredentials,
+          { headers: headers }
+        )
+      );
       console.log('User logged in successfully', response);
       // Optionally, redirect the user to another page after login
       // this.router.navigate(['/home']);
@@ -33,5 +46,9 @@ export class SignInComponent {
       console.error('Login failed', error);
       this.error = 'Login failed. Please check your credentials and try again.';
     }
+  }
+
+  navigateToRegister(): void{
+    this.router.navigate(['register']);
   }
 }

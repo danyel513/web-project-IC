@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import {FormsModule} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +20,7 @@ export class RegisterComponent {
     password: ''
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   async register() {
     try {
@@ -31,5 +32,9 @@ export class RegisterComponent {
     } catch (error) {
       console.error('Registration failed', error);
     }
+  }
+
+  navigateToSignin(): void {
+    this.router.navigate(['sign-in']);
   }
 }
