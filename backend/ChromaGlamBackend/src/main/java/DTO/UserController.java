@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200") // Allow requests from Angular's localhost
+@CrossOrigin(origins = "http://localhost:4200") // Allow requests from Angular localhost
 
-@RequestMapping("/api/users")
+@RequestMapping("/api/users/")
 public class UserController
 {
     private final UserService userService;
@@ -20,13 +20,13 @@ public class UserController
     }
 
 
-   @PostMapping("/register")
+   @PostMapping("register")
     public ResponseEntity<String> register(@RequestBody User user) {
         userService.registerUser(user.getName(),user.getUsername(), user.getPassword(), user.getEmail());
         return ResponseEntity.ok("User registered successfully.");
     }
 
-    @PutMapping("/id")
+    @PutMapping("id")
     public ResponseEntity<String> updateUser(@RequestBody User user)
     {
         try
@@ -39,14 +39,14 @@ public class UserController
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<String> delete(@PathVariable long id)
     {
         userService.deleteUser(id);
         return ResponseEntity.ok("User deleted successfully.");
     }
 
-    @PostMapping("/login")
+    @PostMapping("login")
     public ResponseEntity<String> login(@RequestBody User user)
     {
         boolean success = userService.authenticate(user.getUsername(), user.getPassword());

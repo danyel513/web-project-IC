@@ -85,3 +85,25 @@ button[type="submit"]:hover {
   background-color: #007FFF;
   color:white;
 }
+
+button {
+  width: 250px;
+  padding: 0.75rem;
+  border: 1px solid #009dff;
+  background-color: transparent;
+  color: #009dff;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  align-self: center;
+}
+
+button:hover {
+  background-color: #009dff;
+  color: #000;
+}
+
+.paragraph{
+  color: white;
+}
