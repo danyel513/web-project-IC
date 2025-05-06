@@ -1,7 +1,7 @@
-package cg_service;
+package org.example.chromaglambackend.cg_service;
 
-import DAO.User;
-import DAO.UserRepository;
+import org.example.chromaglambackend.DAO.User;
+import org.example.chromaglambackend.DAO.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

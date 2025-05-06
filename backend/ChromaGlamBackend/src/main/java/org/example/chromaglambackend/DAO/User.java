@@ -1,4 +1,4 @@
-package DAO;
+package org.example.chromaglambackend.DAO;
 
 import jakarta.persistence.*;
 import jakarta.persistence.GenerationType;

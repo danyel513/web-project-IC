@@ -1,4 +1,4 @@
-package cg_service;
+package org.example.chromaglambackend.cg_service;
 
 
 import org.mindrot.jbcrypt.BCrypt;

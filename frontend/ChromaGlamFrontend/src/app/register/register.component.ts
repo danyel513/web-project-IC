@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import {FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
@@ -24,8 +24,9 @@ export class RegisterComponent {
 
   async register() {
     try {
+      const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
       const response = await firstValueFrom(
-        this.http.post('http://localhost:8080/api/users/register', this.user)
+        this.http.post('http://localhost:8080/api/users/register', this.user, {headers: headers})
       );
       console.log('User registered successfully', response);
       // You can redirect the user here if you want

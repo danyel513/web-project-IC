@@ -1,6 +1,6 @@
 package services_test;
-import cg_service.WeatherData;
-import cg_service.WeatherService;
+import org.example.chromaglambackend.cg_service.WeatherData;
+import org.example.chromaglambackend.cg_service.WeatherService;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

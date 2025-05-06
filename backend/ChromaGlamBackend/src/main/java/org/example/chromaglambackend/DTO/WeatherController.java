@@ -3,10 +3,10 @@
 WeatherController class will expose the weather data to the frontend.
 
  */
-package DTO;
+package org.example.chromaglambackend.DTO;
 
-import cg_service.WeatherData;
-import cg_service.WeatherService;
+import org.example.chromaglambackend.cg_service.WeatherData;
+import org.example.chromaglambackend.cg_service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;

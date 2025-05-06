@@ -22,7 +22,7 @@ export class SignInComponent {
   async signIn() {
     const userCredentials = {
       username: this.username,
-      password: this.password,
+      password: this.password
     };
 
     const headers = new HttpHeaders({
