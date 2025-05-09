@@ -9,7 +9,7 @@ public class PasswordEncryption
 {
     public static String hashPassword(String plainPassword)
     {
-        return BCrypt.hashpw(plainPassword, BCrypt.gensalt(45));
+        return BCrypt.hashpw(plainPassword, BCrypt.gensalt(12));
     }
 
     public static boolean checkPassword(String plainPassword, String hashedPassword)

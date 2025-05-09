@@ -4,9 +4,9 @@ public class RegisterRequest
 {
     private String name;
     private String email;
+    private String preferences;
     private String password;
     private String username;
-    private String preferences;
 
     public RegisterRequest(String name, String username, String email, String password, String preferences)
     {

@@ -15,27 +15,31 @@ public class User
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private long user_id;
+
     @Column(name = "name")
     private String name;
-    @Column(name = "username")
-    private String username;
+
     @Column(name = "email")
     private String email;
+
     @Column(name = "preferences")
     private String preferences;
+
     @Column(name = "password")
     private String password;
-    @Column(name = "avatar")
-    private byte[] avatar;
+
+    @Column(name = "username")
+    private String username;
 
     public User() {}
 
-    public User(String name,String username, String password, String email)
+    public User(String name,String username, String password, String email, String preferences)
     {
         this.name = name;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.preferences = preferences;
     }
 
     // getters and setters
@@ -43,10 +47,6 @@ public class User
 
     public long getUser_id() {
         return user_id;
-    }
-
-    public void setUser_id(long user_id) {
-        this.user_id = user_id;
     }
 
     public String getName() {
@@ -89,11 +89,4 @@ public class User
         this.password = password;
     }
 
-    public byte[] getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(byte[] avatar) {
-        this.avatar = avatar;
-    }
 }

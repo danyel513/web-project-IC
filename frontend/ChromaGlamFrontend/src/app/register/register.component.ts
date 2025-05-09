@@ -14,10 +14,10 @@ import {Router} from '@angular/router';
 export class RegisterComponent {
   user = {
     name: '',
-    username: '',
     email: '',
     preferences: '',
-    password: ''
+    password: '',
+    username: ''
   };
 
   constructor(private http: HttpClient, private router: Router) {}

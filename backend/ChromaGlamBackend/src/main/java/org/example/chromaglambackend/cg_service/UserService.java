@@ -17,11 +17,11 @@ public class UserService
         this.userRepository = userRepository;
     }
 
-    public void registerUser(String name, String username,String email, String password)
+    public boolean registerUser(String name, String username,String email, String password, String preferences)
     {
         String hashedPassword = PasswordEncryption.hashPassword(password);
-        User user = new User(name,username,email,hashedPassword);
-        userRepository.save(user);
+        User user = new User(name,username,hashedPassword,email, preferences);
+        return userRepository.save(user).equals(user);
     }
 
     public User update(long id, String name, String username, String email, String password)
@@ -39,14 +39,20 @@ public class UserService
         throw new RuntimeException("User not found");
     }
 
-    public void deleteUser(long id)
+    public boolean deleteUser(String username)
     {
-        userRepository.deleteById(id);
+        User user = userRepository.findByUsername(username);
+        if (user != null)
+        {
+            userRepository.deleteById(user.getUser_id());
+            return true;
+        }
+        return false;
     }
 
-    public boolean authenticate(String email, String password)
+    public boolean authenticate(String username, String password)
     {
-        User user = userRepository.findByEmail(email);
+        User user = userRepository.findByUsername(username);
         if(user == null) return false;
         return PasswordEncryption.checkPassword(password, user.getPassword());
     }
