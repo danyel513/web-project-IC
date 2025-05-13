@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import {FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,7 @@ export class RegisterComponent {
     username: ''
   };
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router,private userService: UserService) {}
 
   async register() {
     try {
@@ -29,6 +30,8 @@ export class RegisterComponent {
         this.http.post('http://localhost:8080/api/users/register', this.user, {headers: headers})
       );
       console.log('User registered successfully', response);
+      this.userService.setUserData(this.user.username, this.user.preferences);
+      this.router.navigate(['home']);
       // You can redirect the user here if you want
     } catch (error) {
       console.error('Registration failed', error);
