@@ -22,4 +22,19 @@ public class OutfitController
     public List<Outfit> getAllOutfits() {
         return outfitService.getAllOutfits();
     }
+
+    @GetMapping(value = "/get")
+    public Outfit getBestOutfit() {
+        return outfitService.getBestOutfit();
+    }
+
+    @GetMapping(value = "/get")
+    public Outfit getOtherOutfit() {
+        return outfitService.getOtherOutfit();
+    }
+
+    @GetMapping(value = "/get")
+    public Outfit getOldOutfit(){
+        return outfitService.getOldOutfit();
+    }
 }

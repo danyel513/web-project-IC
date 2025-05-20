@@ -40,6 +40,21 @@ public class OutfitService
         return outfitRepository.findAll();
     }
 
+    public Outfit getBestOutfit()
+    {
+        return new Outfit();
+    }
+
+    public Outfit getOldOutfit()
+    {
+        return new Outfit();
+    }
+
+    public Outfit getOtherOutfit()
+    {
+        return new Outfit();
+    }
+
     /*
     public static void main(String[] args) {
 
