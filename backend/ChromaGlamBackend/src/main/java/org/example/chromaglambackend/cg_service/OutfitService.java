@@ -19,11 +19,11 @@ import java.util.Scanner;
 public class OutfitService
 {
 
-    private static final String GITHUB_TOKEN = "1";
+    private static final String TOKEN = "1";
     public static void main(String[] args) {
 
         // Fetch your GitHub PAT (token) from environment variables
-        String key = GITHUB_TOKEN;
+        String key = TOKEN;
         String endpoint = "https://models.github.ai/inference";
         String model = "openai/gpt-4o-mini";
 
