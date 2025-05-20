@@ -25,6 +25,9 @@ public class Outfit
     @Column(name = "style")
     private String style;
 
+    @Column(name = "available")
+    private int available;
+
     public Outfit() {}
 
     public Outfit(String image, String description, String style)
@@ -35,9 +38,6 @@ public class Outfit
     }
 
     //getters and setters
-    public long getOutfit_id() {
-        return item_id;
-    }
 
     public String getImage() {
         return image;
@@ -63,5 +63,21 @@ public class Outfit
         this.style = style;
     }
 
+    public int getAvailable() {
+        return available;
+    }
 
+    public void setAvailable(int available) {
+        this.available = available;
+    }
+
+    public long getItem_id() {
+        return item_id;
+    }
+
+    @Override
+    public String toString()
+    {
+        return this.item_id + "\t" + this.description + "\t" + this.style + "\t" + this.available;
+    }
 }

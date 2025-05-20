@@ -29,7 +29,6 @@
     <properties>
         <java.version>17</java.version>
         <spring-cloud-azure.version>5.22.0</spring-cloud-azure.version>
-        <spring-ai.version>1.0.0-RC1</spring-ai.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -37,13 +36,6 @@
                 <groupId>com.azure.spring</groupId>
                 <artifactId>spring-cloud-azure-dependencies</artifactId>
                 <version>${spring-cloud-azure.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.ai</groupId>
-                <artifactId>spring-ai-bom</artifactId>
-                <version>${spring-ai.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -141,24 +133,12 @@
             <artifactId>spring-cloud-azure-starter-data-cosmos</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.ai</groupId>
-            <artifactId>spring-ai-starter-vector-store-azure-cosmos-db</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.azure.spring</groupId>
             <artifactId>spring-cloud-azure-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.ai</groupId>
-            <artifactId>spring-ai-starter-model-azure-openai</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.azure.spring</groupId>
             <artifactId>spring-cloud-azure-starter-active-directory</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.ai</groupId>
-            <artifactId>spring-ai-starter-vector-store-azure</artifactId>
         </dependency>
         <dependency>
             <groupId>com.azure.spring</groupId>
