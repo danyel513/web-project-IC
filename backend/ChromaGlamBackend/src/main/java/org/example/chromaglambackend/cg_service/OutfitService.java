@@ -1,36 +1,41 @@
 package org.example.chromaglambackend.cg_service;
 
-//import com.azure.ai.inference.ChatCompletionsClient;
-//import com.azure.ai.inference.ChatCompletionsClientBuilder;
-//import com.azure.ai.inference.models.ChatRequestMessage;
-//import com.azure.ai.inference.models.ChatRequestSystemMessage;
-//import com.azure.ai.inference.models.ChatRequestUserMessage;
-//import com.azure.ai.inference.models.ChatCompletionsOptions;
-//import com.azure.ai.inference.models.StreamingChatCompletionsUpdate;
-//import com.azure.ai.inference.models.StreamingChatResponseMessageUpdate;
-//import com.azure.core.credential.AzureKeyCredential;
-//import com.azure.core.util.CoreUtils;
-//import com.azure.core.util.IterableStream;
+import com.azure.ai.inference.ChatCompletionsClient;
+import com.azure.ai.inference.ChatCompletionsClientBuilder;
+import com.azure.ai.inference.models.*;
+import com.azure.core.credential.AzureKeyCredential;
+import com.azure.core.util.Configuration;
+import com.azure.core.util.CoreUtils;
+import com.azure.core.util.IterableStream;
 import org.example.chromaglambackend.DAO.Outfit;
 import org.example.chromaglambackend.DAO.OutfitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Service;
-
-//import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.List;
-//import java.util.Scanner;
+import java.util.Optional;
+import java.util.Scanner;
+import java.util.function.Function;
 
 @Service
 public class OutfitService
 {
     // token access
-    private static final String TOKEN = "";
+    private static final String TOKEN = "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";
+    private static final String endpoint = "https://models.github.ai/inference";
+    private static final String model = "openai/gpt-4o-mini";
 
     // repository
-    private final OutfitRepository outfitRepository;
+    private static OutfitRepository outfitRepository;
 
     @Autowired
-    public OutfitService(OutfitRepository outfitRepository) {
+    public OutfitService(OutfitRepository outfitRepository)
+    {
         this.outfitRepository = outfitRepository;
     }
 
@@ -40,66 +45,72 @@ public class OutfitService
         return outfitRepository.findAll();
     }
 
-    /*
     public static void main(String[] args) {
+        askFashionAdvice("casual");
+    }
 
-        // Fetch your token from environment variables
-        String key = TOKEN;
-        String endpoint = "https://models.github.ai/inference";
-        String model = "openai/gpt-4o-mini";
+    public static void askFashionAdvice(String preferences)
+    {
+        OutfitService outfitService = new OutfitService(outfitRepository);
 
-        // Create the client using endpoint and credentials
+        // Get the latest weather data
+        WeatherService weatherService = new WeatherService();
+        WeatherData weatherData = weatherService.getWeatherDetails();
+        String weatherForecast = weatherData.toString();
+
+        // Get all available items
+        ArrayList<Outfit> outfits = (ArrayList<Outfit>) outfitService.getAllOutfits();
+
+        // Convert available outfit items to a comma-separated list
+        StringBuilder itemsBuilder = new StringBuilder();
+        for (Outfit item : outfits) {
+            if(item.getAvailable() == 1)
+                itemsBuilder.append(item.getDescription()).append(", ");
+        }
+
+        // Remove trailing comma and space
+        String outfitItems = !itemsBuilder.isEmpty()
+                ? itemsBuilder.substring(0, itemsBuilder.length() - 2)
+                : "No items available";
+
+        // Build the client
         ChatCompletionsClient client = new ChatCompletionsClientBuilder()
-                .credential(new AzureKeyCredential(key))
+                .credential(new AzureKeyCredential(TOKEN))
                 .endpoint(endpoint)
                 .buildClient();
 
-        // Store chat history
-        List<ChatRequestMessage> chatHistory = new ArrayList<>();
-        // Add a system message to set behavior
-        chatHistory.add(new ChatRequestSystemMessage("You are a fashion expert."));
+        // Chat history
+        List<ChatRequestMessage> chatMessages = new ArrayList<>();
 
-        Scanner scanner = new Scanner(System.in);
+        // Set assistant behavior
+        chatMessages.add(new ChatRequestSystemMessage("You are a helpful fashion assistant. "
+                + "Match available outfit items with the weather and user preferences. "
+                + "Respond concisely with your outfit suggestions."));
 
-        // Infinite chat loop
-        while (true) {
-            System.out.print("\nYou: ");
-            String userInput = scanner.nextLine();
+        // Provide the user's wardrobe
+        chatMessages.add(new ChatRequestUserMessage("These are the items in my wardrobe: " + outfitItems));
 
-            if (userInput == null || userInput.isEmpty()) {
-                break; // Exit on empty input
-            }
+        // Provide weather forecast
+        chatMessages.add(new ChatRequestUserMessage("This is the weather forecast: " + weatherForecast));
 
-            // Add user input to chat history
-            chatHistory.add(new ChatRequestUserMessage(userInput));
+        // Provide user preferences
+        chatMessages.add(new ChatRequestUserMessage("These are my clothing preferences: " + preferences));
 
-            // Create options for the API call
-            ChatCompletionsOptions options = new ChatCompletionsOptions(chatHistory);
-            options.setModel(model);
+        // Ask the actual fashion advice question
+        chatMessages.add(new ChatRequestUserMessage("What should I wear today?"));
 
-            // Stream response from model
-            IterableStream<StreamingChatCompletionsUpdate> stream = client.completeStream(options);
+        // Prepare request
+        ChatCompletionsOptions options = new ChatCompletionsOptions(chatMessages);
+        options.setModel(model);
 
-            StringBuilder assistantReply = new StringBuilder();
+        // Call the model
+        ChatCompletions response = client.complete(options);
 
-            stream.stream().forEach(update -> {
-                if (!CoreUtils.isNullOrEmpty(update.getChoices())) {
-                    StreamingChatResponseMessageUpdate delta = update.getChoice().getDelta();
-
-                    if (delta.getContent() != null) {
-                        System.out.print(delta.getContent()); // Print token by token
-                        assistantReply.append(delta.getContent()); // Build full response
-                    }
-                }
-            });
-
-            // Add assistant response back to history
-            chatHistory.add(new com.azure.ai.inference.models.ChatRequestAssistantMessage(assistantReply.toString()));
-        }
-
-        scanner.close();
+        // Output response
+        String reply = response.getChoice().getMessage().getContent();
+        System.out.println("Assistant: " + reply);
     }
-     */
+
 
 
 }

@@ -31,4 +31,22 @@ public class WeatherData
         this.uvIndex = uvIndex;
         this.isDay = isDay;
     }
+
+    public String toString()
+    {
+        return "WeatherInfo {" +
+                "city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                ", temperature=" + temperature + "°C" +
+                ", apparentTemperature=" + apparentTemperature + "°C" +
+                ", rainProbability=" + rainProbability + "%" +
+                ", cloudCover=" + cloudCover + "%" +
+                ", windSpeed=" + windSpeed + " km/h" +
+                ", windGusts=" + windGusts + " km/h" +
+                ", weatherCode=" + weatherCode +
+                ", weatherDescription='" + weatherDescription + '\'' +
+                ", uvIndex=" + uvIndex +
+                ", isDay=" + isDay +
+                '}';
+    }
 }
