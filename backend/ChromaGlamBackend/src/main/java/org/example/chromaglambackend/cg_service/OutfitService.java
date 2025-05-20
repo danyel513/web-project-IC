@@ -18,7 +18,8 @@ import java.util.Scanner;
 
 public class OutfitService
 {
-    private static final String GITHUB_TOKEN = "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";
+    //private static final String GITHUB_TOKEN = "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";
+    private static final String GITHUB_TOKEN = "1";
     public static void main(String[] args) {
 
         // Fetch your GitHub PAT (token) from environment variables
