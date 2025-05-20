@@ -6,9 +6,9 @@ import {HomeComponent} from './home/home.component';
 
 // add here all routes to the components:
 export const routes: Routes = [
-  { path: '', component: HomeComponent }, // default route to home comp
+  { path: '', component: SignInComponent }, // default route to home comp
   { path: 'register', component: RegisterComponent },
-  { path: 'sign-in', component: SignInComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'recommendations', component: RecommendationComponent},
   { path: '**', redirectTo: '' } // general route
 

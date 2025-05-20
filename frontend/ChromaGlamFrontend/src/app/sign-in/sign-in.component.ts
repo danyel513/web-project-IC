@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
+import { UserService } from '../services/user.service'; // Import your service
+
 
 @Component({
   selector: 'app-sign-in',
@@ -17,7 +19,7 @@ export class SignInComponent {
   password = '';
   error = '';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private userService: UserService) {}
 
   async signIn() {
     const userCredentials = {
@@ -32,7 +34,7 @@ export class SignInComponent {
     try {
       console.log(userCredentials.username);
       console.log(userCredentials.password);
-      const response = await firstValueFrom(
+      const response: any = await firstValueFrom(
         this.http.post(
           'http://localhost:8080/api/users/login',
           userCredentials,
@@ -40,8 +42,10 @@ export class SignInComponent {
         )
       );
       console.log('User logged in successfully', response);
+      // Store user data in the service
+      this.userService.setUserData(this.username,response.preferences);
       // Optionally, redirect the user to another page after login
-      // this.router.navigate(['/home']);
+      this.router.navigate(['/home']);
     } catch (error) {
       console.error('Login failed', error);
       this.error = 'Login failed. Please check your credentials and try again.';

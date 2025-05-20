@@ -15,9 +15,9 @@
     <div class="profile">
       <i class="profile-icon"></i>
       <br><br>
-      <div class="username">Hi, Username</div>
+      <div class="username">Hi, {{ username }}</div> <!-- Dynamic username -->
       <br>
-      <button class="action-btn" type="button" (click)="navigateToSignin()" >SWITCH USER</button>
+      <button class="action-btn" type="button" (click)="navigateToSignin()">SWITCH USER</button>
     </div>
   </header>
 
@@ -26,7 +26,7 @@
   <main class="main-content">
     <div class="home-content">
       <div class="welcome-text">
-        <i>Welcome back,</i>
+        <i>Welcome back, {{ username }}!</i> <!-- Dynamic greeting -->
         <p>What would you like to wear today?</p>
         <button class="see-outfits-btn" type="button" (click)="navigateToRecommendations()">SEE OUTFITS</button>
         <p class="instruction-text">Click the button to see the recommended outfits for the day.</p>
