@@ -18,25 +18,26 @@ import java.util.Scanner;
 
 public class OutfitService
 {
+    // token access
+    private static final String TOKEN = "";
 
-    //private static final String TOKEN = "1";
     public static void main(String[] args) {
 
         // Fetch your token from environment variables
-        //String key = TOKEN;
+        String key = TOKEN;
         String endpoint = "https://models.github.ai/inference";
         String model = "openai/gpt-4o-mini";
 
         // Create the client using endpoint and credentials
-//        ChatCompletionsClient client = new ChatCompletionsClientBuilder()
-//                .credential(new AzureKeyCredential(key))
-//                .endpoint(endpoint)
-//                .buildClient();
+        ChatCompletionsClient client = new ChatCompletionsClientBuilder()
+                .credential(new AzureKeyCredential(key))
+                .endpoint(endpoint)
+                .buildClient();
 
         // Store chat history
         List<ChatRequestMessage> chatHistory = new ArrayList<>();
         // Add a system message to set behavior
-        chatHistory.add(new ChatRequestSystemMessage("You are a helpful assistant."));
+        chatHistory.add(new ChatRequestSystemMessage("You are a fashion expert."));
 
         Scanner scanner = new Scanner(System.in);
 
@@ -57,25 +58,32 @@ public class OutfitService
             options.setModel(model);
 
             // Stream response from model
-            //IterableStream<StreamingChatCompletionsUpdate> stream = client.completeStream(options);
+            IterableStream<StreamingChatCompletionsUpdate> stream = client.completeStream(options);
 
             StringBuilder assistantReply = new StringBuilder();
 
-//            stream.stream().forEach(update -> {
-//                if (!CoreUtils.isNullOrEmpty(update.getChoices())) {
-//                    StreamingChatResponseMessageUpdate delta = update.getChoice().getDelta();
-//
-//                    if (delta.getContent() != null) {
-//                        System.out.print(delta.getContent()); // Print token by token
-//                        assistantReply.append(delta.getContent()); // Build full response
-//                    }
-//                }
-//            });
+            stream.stream().forEach(update -> {
+                if (!CoreUtils.isNullOrEmpty(update.getChoices())) {
+                    StreamingChatResponseMessageUpdate delta = update.getChoice().getDelta();
+
+                    if (delta.getContent() != null) {
+                        System.out.print(delta.getContent()); // Print token by token
+                        assistantReply.append(delta.getContent()); // Build full response
+                    }
+                }
+            });
 
             // Add assistant response back to history
             chatHistory.add(new com.azure.ai.inference.models.ChatRequestAssistantMessage(assistantReply.toString()));
         }
 
         scanner.close();
-        }
+    }
+
+    // this method will contact the repository (DAO) layer to obtain
+    // all the available items
+//    private List<Object> saveAvailableOutfits()
+//    {
+//        return null;
+//    }
 }
