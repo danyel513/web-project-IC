@@ -18,22 +18,22 @@ public class OutfitController
         this.outfitService = outfitService;
     }
 
-    @GetMapping(value = "/get")
+    @GetMapping(value = "/get/all_outfits")
     public List<Outfit> getAllOutfits() {
         return outfitService.getAllOutfits();
     }
 
-    @GetMapping(value = "/get")
+    @GetMapping(value = "/get/best_outfit")
     public Outfit getBestOutfit() {
         return outfitService.getBestOutfit();
     }
 
-    @GetMapping(value = "/get")
+    @GetMapping(value = "/get/other_outfit")
     public Outfit getOtherOutfit() {
         return outfitService.getOtherOutfit();
     }
 
-    @GetMapping(value = "/get")
+    @GetMapping(value = "/get/old_outfit")
     public Outfit getOldOutfit(){
         return outfitService.getOldOutfit();
     }
