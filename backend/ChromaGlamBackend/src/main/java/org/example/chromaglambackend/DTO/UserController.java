@@ -39,7 +39,7 @@ public class UserController
         return ResponseEntity.ok(HttpStatus.FOUND); // return the found status to signal deletion completed
     }
 
-    // lod in will authenticate a user
+    // log in will authenticate a user
     @PostMapping(value = "/login", consumes = "application/json")
     public ResponseEntity<HttpStatus> login(@RequestBody LoginRequest user)
     {
