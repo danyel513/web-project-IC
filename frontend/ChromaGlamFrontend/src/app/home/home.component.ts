@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {Router} from '@angular/router';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +9,11 @@ import {Router} from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+
+  username: string = '';
+  preferences: string = '';
+
+
   tips: string[] = [
     "Don't forget to bring your umbrella with you, there's gonna be rain today in Timișoara.",
     "Wear something light today, it's going to be sunny and warm!",
@@ -15,10 +21,14 @@ export class HomeComponent {
     "Perfect weather for sneakers, leave the boots at home!",
     "It might snow later today, dress warmly and stay safe!"
   ];
-  constructor(private router: Router) {} // inject Router
+  constructor(private router: Router, private userService: UserService) {
+    this.username = this.userService.getUsername();
+    this.preferences = this.userService.getPreferences();
+  } // inject Router and Service
 
   navigateToRecommendations(): void {
     this.router.navigate(['recommendations']);
+
   }
 
   navigateToSignin(): void {
