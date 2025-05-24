@@ -7,7 +7,7 @@ export class UserService {
   private username: string = '';
   private preferences: string = '';
 
-  setUserData(username: string, preferences: string): void {
+  setUserData(username: string, preferences: string) {
     this.username = username;
     this.preferences = preferences;
   }
