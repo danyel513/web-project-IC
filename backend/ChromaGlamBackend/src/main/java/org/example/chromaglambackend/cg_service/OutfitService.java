@@ -4,34 +4,28 @@ import com.azure.ai.inference.ChatCompletionsClient;
 import com.azure.ai.inference.ChatCompletionsClientBuilder;
 import com.azure.ai.inference.models.*;
 import com.azure.core.credential.AzureKeyCredential;
-import com.azure.core.util.Configuration;
-import com.azure.core.util.CoreUtils;
-import com.azure.core.util.IterableStream;
 import org.example.chromaglambackend.DAO.Outfit;
 import org.example.chromaglambackend.DAO.OutfitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.Scanner;
-import java.util.function.Function;
 
 @Service
 public class OutfitService
 {
     // token access
-    private static final String TOKEN = "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";
-    private static final String endpoint = "https://models.github.ai/inference";
-    private static final String model = "openai/gpt-4o-mini";
+    private final String TOKEN = "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";
+    private final String endpoint = "https://models.github.ai/inference";
+    private final String model = "openai/gpt-4o-mini";
 
     // repository
-    private static OutfitRepository outfitRepository;
+    private final OutfitRepository outfitRepository;
 
     @Autowired
     public OutfitService(OutfitRepository outfitRepository)
@@ -45,27 +39,38 @@ public class OutfitService
         return outfitRepository.findAll();
     }
 
-    public static void main(String[] args) {
-        askFashionAdvice("casual");
+    public byte[] getImageById(long id)
+    {
+        byte[] image = null;
+        Outfit outfit = outfitRepository.findBy(id);
+        // assign the image saved on backend by the path got from database
+        if (outfit != null && outfit.getImage() != null) {
+            try {
+                Path imagePath = Paths.get(outfit.getImage());
+                image = Files.readAllBytes(imagePath);
+            } catch (IOException e) {
+                e.printStackTrace(); // log error appropriately
+            }
+        }
+        return image;
     }
 
-    public static void askFashionAdvice(String preferences)
+    public String askFashionAdvice(String preferences)
     {
-        OutfitService outfitService = new OutfitService(outfitRepository);
-
         // Get the latest weather data
         WeatherService weatherService = new WeatherService();
         WeatherData weatherData = weatherService.getWeatherDetails();
         String weatherForecast = weatherData.toString();
 
         // Get all available items
-        ArrayList<Outfit> outfits = (ArrayList<Outfit>) outfitService.getAllOutfits();
+        ArrayList<Outfit> outfits = (ArrayList<Outfit>) getAllOutfits();
 
         // Convert available outfit items to a comma-separated list
         StringBuilder itemsBuilder = new StringBuilder();
         for (Outfit item : outfits) {
             if(item.getAvailable() == 1)
-                itemsBuilder.append(item.getDescription()).append(", ");
+                // format -> id:description
+                itemsBuilder.append(item.getItem_id()).append(":").append(item.getDescription()).append(", ");
         }
 
         // Remove trailing comma and space
@@ -85,7 +90,9 @@ public class OutfitService
         // Set assistant behavior
         chatMessages.add(new ChatRequestSystemMessage("You are a helpful fashion assistant. "
                 + "Match available outfit items with the weather and user preferences. "
-                + "Respond concisely with your outfit suggestions."));
+                + "Respond concisely with your outfit suggestions."
+                + "The response should contain only the id of items (the part before :)."
+                + "Respect this format: id1/id2/id3/.../idn"));
 
         // Provide the user's wardrobe
         chatMessages.add(new ChatRequestUserMessage("These are the items in my wardrobe: " + outfitItems));
@@ -108,9 +115,6 @@ public class OutfitService
 
         // Output response
         String reply = response.getChoice().getMessage().getContent();
-        System.out.println("Assistant: " + reply);
+        return reply;
     }
-
-
-
 }

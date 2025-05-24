@@ -14,7 +14,7 @@ public class User
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private long user_id;
+    private long id;
 
     @Column(name = "name")
     private String name;
@@ -45,8 +45,8 @@ public class User
     // getters and setters
 
 
-    public long getUser_id() {
-        return user_id;
+    public long getUserId() {
+        return id;
     }
 
     public String getName() {
