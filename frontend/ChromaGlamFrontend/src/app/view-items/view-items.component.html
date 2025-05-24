@@ -1,0 +1,37 @@
+<div class="view-items-container">
+  <h1 class="page-title">Available Outfits</h1>
+  <hr />
+
+  <div *ngIf="loading" class="loading-text">Loading outfits...</div>
+  <div *ngIf="error" class="error-text">{{ error }}</div>
+
+  <div class="outfits-grid" *ngIf="!loading && !error && outfits.length > 0">
+    <div class="outfit-card" *ngFor="let outfit of outfits">
+      <img
+        class="outfit-image"
+        [src]="outfit.image"
+        alt="Outfit Image"
+        *ngIf="outfit.image; else noImage"
+      />
+      <ng-template #noImage>
+        <div class="no-image">No Image</div>
+      </ng-template>
+
+      <div class="outfit-info">
+        <p class="description">{{ outfit.description }}</p>
+        <p class="style">Style: <span class="blue">{{ outfit.style }}</span></p>
+        <p
+          class="availability"
+          [class.available]="outfit.available"
+          [class.unavailable]="!outfit.available"
+        >
+          {{ outfit.available ? 'Available' : 'Unavailable' }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && !error && outfits.length === 0" class="no-items">
+    No outfits to display.
+  </div>
+</div>

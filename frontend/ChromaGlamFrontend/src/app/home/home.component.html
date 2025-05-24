@@ -12,12 +12,23 @@
       <span class="l9">a</span>
       <span class="l10">m</span>
     </div>
+
     <div class="profile">
-      <i class="profile-icon"></i>
-      <br><br>
-      <div class="username">Hi, {{ username }}</div> <!-- Dynamic username -->
-      <br>
+      <img [src]="selectedAvatar" alt="User Avatar" class="avatar-image" (click)="toggleAvatarPicker()">
+
+      <div class="username">Hi, {{ username }}</div>
       <button class="action-btn" type="button" (click)="navigateToSignin()">SWITCH USER</button>
+
+
+      <div *ngIf="avatarPickerVisible" class="avatar-picker">
+        <img
+          *ngFor="let avatar of avatars"
+          [src]="avatar"
+          class="avatar-option"
+          [class.selected]="avatar === selectedAvatar"
+          (click)="selectAvatar(avatar); $event.stopPropagation()"
+          alt="Avatar option">
+      </div>
     </div>
   </header>
 
@@ -26,7 +37,7 @@
   <main class="main-content">
     <div class="home-content">
       <div class="welcome-text">
-        <i>Welcome back, {{ username }}!</i> <!-- Dynamic greeting -->
+        <i>Welcome back, {{ username }}!</i>
         <p>What would you like to wear today?</p>
         <button class="see-outfits-btn" type="button" (click)="navigateToRecommendations()">SEE OUTFITS</button>
         <p class="instruction-text">Click the button to see the recommended outfits for the day.</p>
@@ -35,13 +46,15 @@
       <div class="action-buttons">
         <button class="action-btn">ADD ITEM</button>
         <button class="action-btn">REMOVE ITEM</button>
-        <button class="action-btn">VIEW ITEMS</button>
+        <button class="action-btn" (click)="navigateToViewItems()">VIEW ITEMS</button>
         <button class="action-btn">MODIFY PREFERENCES</button>
       </div>
     </div>
 
+    <!-- Tips Section with Corrected Image Paths -->
     <div class="tips-section">
-      <div class="image-placeholder"></div>
+      <img src="/coffee_meme.png" alt="Left Tip Image" class="image-placeholder">
+
       <div class="tips-box">
         <div class="tips-title">Tips of the day</div>
         <hr>
@@ -55,7 +68,8 @@
           <button type="button" class="arrow-btn" (click)="nextTip()">&#8594;</button>
         </div>
       </div>
-      <div class="image-placeholder"></div>
+
+      <img src="/clouds.png" alt="Right Tip Image" class="image-placeholder">
     </div>
   </main>
 </div>
