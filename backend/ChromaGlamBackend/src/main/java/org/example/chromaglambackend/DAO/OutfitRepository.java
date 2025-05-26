@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OutfitRepository extends JpaRepository<Outfit, Long> {
     // we will use the default findAll() method already implemented in JpaRepository
-
+    public Outfit findById(long item_id);
 }

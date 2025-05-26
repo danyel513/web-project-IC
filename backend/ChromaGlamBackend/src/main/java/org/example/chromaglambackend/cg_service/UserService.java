@@ -44,7 +44,7 @@ public class UserService
         User user = userRepository.findByUsername(username);
         if (user != null)
         {
-            userRepository.deleteById(user.getUser_id());
+            userRepository.deleteById(user.getUserId());
             return true;
         }
         return false;
@@ -56,4 +56,10 @@ public class UserService
         if(user == null) return false;
         return PasswordEncryption.checkPassword(password, user.getPassword());
     }
+
+    public User getUser(String username)
+    {
+        return userRepository.findByUsername(username);
+    }
 }
+
