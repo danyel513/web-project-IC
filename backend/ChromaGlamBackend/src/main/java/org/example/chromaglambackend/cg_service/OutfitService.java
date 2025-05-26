@@ -70,5 +70,66 @@ public class OutfitService
         return new Outfit();
     }
 
-   
+   public String askFashionAdvice(String preferences)
+    {
+        // Get the latest weather data
+        WeatherService weatherService = new WeatherService();
+        WeatherData weatherData = weatherService.getWeatherDetails();
+        String weatherForecast = weatherData.toString();
+
+        // Get all available items
+        ArrayList<Outfit> outfits = (ArrayList<Outfit>) getAllOutfits();
+
+        // Convert available outfit items to a comma-separated list
+        StringBuilder itemsBuilder = new StringBuilder();
+        for (Outfit item : outfits) {
+            if(item.getAvailable() == 1)
+                // format -> id:description
+                itemsBuilder.append(item.getItem_id()).append(":").append(item.getDescription()).append(", ");
+        }
+
+        // Remove trailing comma and space
+        String outfitItems = !itemsBuilder.isEmpty()
+                ? itemsBuilder.substring(0, itemsBuilder.length() - 2)
+                : "No items available";
+
+        // Build the client
+        ChatCompletionsClient client = new ChatCompletionsClientBuilder()
+                .credential(new AzureKeyCredential(TOKEN))
+                .endpoint(endpoint)
+                .buildClient();
+
+        // Chat history
+        List<ChatRequestMessage> chatMessages = new ArrayList<>();
+
+        // Set assistant behavior
+        chatMessages.add(new ChatRequestSystemMessage("You are a helpful fashion assistant. "
+                + "Match available outfit items with the weather and user preferences. "
+                + "Respond concisely with your outfit suggestions."
+                + "The response should contain only the id of items (the part before :)."
+                + "Respect this format: id1/id2/id3/.../idn"));
+
+        // Provide the user's wardrobe
+        chatMessages.add(new ChatRequestUserMessage("These are the items in my wardrobe: " + outfitItems));
+
+        // Provide weather forecast
+        chatMessages.add(new ChatRequestUserMessage("This is the weather forecast: " + weatherForecast));
+
+        // Provide user preferences
+        chatMessages.add(new ChatRequestUserMessage("These are my clothing preferences: " + preferences));
+
+        // Ask the actual fashion advice question
+        chatMessages.add(new ChatRequestUserMessage("What should I wear today?"));
+
+        // Prepare request
+        ChatCompletionsOptions options = new ChatCompletionsOptions(chatMessages);
+        options.setModel(model);
+
+        // Call the model
+        ChatCompletions response = client.complete(options);
+
+        // Output response
+        String reply = response.getChoice().getMessage().getContent();
+        return reply;
+    }
 }
