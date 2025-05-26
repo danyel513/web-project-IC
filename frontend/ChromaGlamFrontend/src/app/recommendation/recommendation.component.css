@@ -1,9 +1,8 @@
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%;
   background-color: #121212;
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', sans-serif;
   color: white;
 }
 
@@ -12,24 +11,30 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 2rem;
-  background-color: #121212;
+  padding: 2rem 1rem;
 }
 
 .logo {
-  font-size: 4.5rem;
+  font-size: 4rem;
   font-weight: bold;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.logo span {
+  display: inline-block;
+  transition: transform 0.3s;
+}
+
+.logo span:hover {
+  transform: scale(1.2);
 }
 
 .logo .l1 { color: #99CCFF; }
 .logo .l2 { color: #66B2FF; }
 .logo .l3 { color: #3399FF; }
 .logo .l4 { color: #007FFF; }
-.logo .l5 { color: #004C99; }
-.logo .l6 { color: #004C99; }
-.logo .l7 { color: #808080; }
-.logo .l8 { color: #808080; }
+.logo .l5, .l6 { color: #004C99; }
+.logo .l7, .l8 { color: #808080; }
 .logo .l9 { color: #999999; }
 .logo .l10 { color: #B3B3B3; }
 
@@ -40,45 +45,97 @@ html, body {
   color: white;
 }
 
-.cards-container {
+.image-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 25px;
+}
+
+.image-wrapper {
+  width: 240px; /* Adjust as needed */
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px; /* Optional inner space */
+  background-color: #fff;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Use 'contain' if you prefer entire image visible */
+  background-color: #f9f9f9; /* Optional background for empty space */
+  display: block;
+  transition: transform 0.3s ease;
+}
+/* Zoom effect on hover */
+.image-wrapper:hover img {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.action-button {
+  background-color: #007BFF; /* Replace with your actual blue if different */
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.action-button:hover {
+  background-color: #0056b3; /* Slightly darker blue */
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+
+.loading-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: nowrap; /* important! no wrapping to next line */
-  gap: 3rem; /* space between cards */
-  margin-bottom: 2rem;
+  margin-top: 50px;
 }
 
-.card {
-  background-color: #2b2b2b;
-  padding: 1.5rem; /* slightly more padding */
-  border: 1px solid #444;
-  border-radius: 16px; /* smoother corners */
-  width: 250px; /* bigger width */
-  text-align: center;
-  color: white;
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 6px solid #e0e0e0;
+  border-top: 6px solid #007BFF; /* Match your blue */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
 }
 
-.image-placeholder {
-  background-color: #444;
-  width: 100%;
-  height: 200px; /* taller placeholder */
-  margin-top: 1rem;
-  border-radius: 10px;
+/* Animation keyframes */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.confirm-button {
-  background-color: transparent;
-  border: 1px solid #007FFF;
-  color: #007FFF;
-  padding: 0.5rem 2rem;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
+.image-wrapper img {
+  opacity: 0;
+  animation: fadeIn 0.6s ease-in-out forwards;
 }
 
-.confirm-button:hover {
-  background-color: #007FFF;
-  color: white;
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
 }

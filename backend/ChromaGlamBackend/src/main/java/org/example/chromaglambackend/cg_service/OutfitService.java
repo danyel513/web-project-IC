@@ -20,7 +20,7 @@ import java.util.List;
 public class OutfitService
 {
     // token access
-    private final String TOKEN = "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";
+    private final String TOKEN = "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";
     private final String endpoint = "https://models.github.ai/inference";
     private final String model = "openai/gpt-4o-mini";
 
@@ -42,7 +42,7 @@ public class OutfitService
     public byte[] getImageById(long id)
     {
         byte[] image = null;
-        Outfit outfit = outfitRepository.findBy(id);
+        Outfit outfit = outfitRepository.findById(id);
         // assign the image saved on backend by the path got from database
         if (outfit != null && outfit.getImage() != null) {
             try {
