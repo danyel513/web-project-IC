@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -23,9 +25,28 @@ public class OutfitController
         this.userService = userService;
     }
 
-    @GetMapping(value = "/get")
+    @GetMapping(value = "/get/all_outfits")
     public List<Outfit> getAllOutfits() {
-        return outfitService.getAllOutfits();
+        ArrayList<Outfit> outfits = (ArrayList<Outfit>) outfitService.getAllOutfits();
+        for(Outfit outfit : outfits) {
+            System.out.println(outfit.toString());
+        }
+        return outfits;
+    }
+
+    @GetMapping(value = "/get/best_outfit")
+    public Outfit getBestOutfit() {
+        return outfitService.getBestOutfit();
+    }
+
+    @GetMapping(value = "/get/other_outfit")
+    public Outfit getOtherOutfit() {
+        return outfitService.getOtherOutfit();
+    }
+
+    @GetMapping(value = "/get/old_outfit")
+    public Outfit getOldOutfit(){
+        return outfitService.getOldOutfit();
     }
 
     @GetMapping(value = "/get/outfit")
