@@ -1,16 +1,45 @@
-<div class="page-container">
-  <div class="logo">
+<div class="page-container animated-bg">
+  <div class="contentx">
+  <br><br>
+  <header class="header">
+  <div class="logo" >
     <span class="l1">C</span><span class="l2">h</span><span class="l3">r</span><span class="l4">o</span><span class="l5">m</span><span class="l6">a</span><span class="l7">G</span><span class="l8">l</span><span class="l9">a</span><span class="l10">m</span>
   </div>
+  <div class="profile">
+    <img [src]="selectedAvatar" alt="User Avatar" class="avatar-image" (click)="toggleAvatarPicker()">
+    <br>
+    <div class="username">Hi, {{ username }}</div>
+    <br>
+    <button class="action-btn" type="button" (click)="navigateToSignin()">SWITCH USER</button>
 
-  <h2 class="title">Old Preference:</h2>
+    <div *ngIf="avatarPickerVisible" class="avatar-picker">
+      <img
+        *ngFor="let avatar of avatars"
+        [src]="avatar"
+        class="avatar-option"
+        [class.selected]="avatar === selectedAvatar"
+        (click)="selectAvatar(avatar); $event.stopPropagation()"
+        alt="Avatar option">
+    </div>
+  </div>
+  </header>
+
+    <hr>
+
+
+    <br><br>
+  <h1 class="typewriter">{{ displayedText }}</h1>
+  <br>
+
+  <br>
+  <h2 class="title-with-lines">Old Preference:</h2>
 
   <div *ngIf="loading" class="loading-container">
     <div class="spinner"></div>
   </div>
 
   <div class="image-container">
-    <div class="image-wrapper" *ngFor="let image of outfitImages">
+    <div class="image-wrapper" *ngFor="let image of outfitImages1">
       <img [src]="image" alt="Outfit image" />
     </div>
   </div>
@@ -19,4 +48,41 @@
     <button class="action-button" (click)="onButtonClick()">Choose this Option</button>
   </div>
 
+    <br><br>
+  <h2 class="title-with-lines">Best Choice:</h2>
+
+  <div *ngIf="loading" class="loading-container">
+    <div class="spinner"></div>
+  </div>
+
+  <div class="image-container">
+    <div class="image-wrapper" *ngFor="let image of outfitImages2">
+      <img [src]="image" alt="Outfit image" />
+    </div>
+  </div>
+
+  <div class="button-container">
+    <button class="action-button" (click)="onButtonClick()">Choose this Option</button>
+  </div>
+
+
+    <br><br>
+  <h2 class="title-with-lines">Try Something New:</h2>
+
+  <div *ngIf="loading" class="loading-container">
+    <div class="spinner"></div>
+  </div>
+
+  <div class="image-container">
+    <div class="image-wrapper" *ngFor="let image of outfitImages3">
+      <img [src]="image" alt="Outfit image" />
+    </div>
+  </div>
+
+  <div class="button-container">
+    <button class="action-button" (click)="onButtonClick()">Choose this Option</button>
+  </div>
+
+
+</div>
 </div>

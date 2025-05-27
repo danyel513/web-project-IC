@@ -1,12 +1,10 @@
-/* background and general settings */
-.home-container {
-  background-color: #121212;
-  color: #e0e0e0;
-  min-height: 150vh;
+.contentx
+{
   max-width: 1200px;
+  min-height: 150vh;
+  align-items: center;
   padding: 4rem;
   margin: 0 auto;
-  font-family: 'Courier New', Courier, monospace;
 }
 
 hr {
@@ -24,9 +22,19 @@ hr {
 }
 
 .logo {
-  font-size: 4.5rem;
-  margin-bottom: 2rem;
+  font-size: 4rem;
   font-weight: bold;
+  margin-bottom: 1.5rem;
+  font-family: Arial, sans-serif;
+}
+
+.logo span {
+  display: inline-block;
+  transition: transform 0.3s;
+}
+
+.logo span:hover {
+  transform: scale(1.2);
 }
 
 .logo .l1 { color: #99CCFF; }
@@ -232,4 +240,20 @@ hr {
   max-width: 200px;
   text-align: center;
   font-size: 0.9rem;
+}
+
+.animated-bg {
+  padding: 4rem;
+  margin: 0 auto;
+  font-family: 'Courier New', Courier, monospace;
+  color: white;
+  background: linear-gradient(-45deg, #020202, #000000, #051320, #00101c);
+  background-size: 400% 400%;
+  animation: gradientMove 10s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
