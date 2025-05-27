@@ -2,16 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { NgIf, NgFor } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {firstValueFrom} from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   standalone: true,
   styleUrls: ['./home.component.css'],
-  imports:[NgIf,NgFor]
+  imports:[NgIf,NgFor,FormsModule]
 })
 export class HomeComponent implements OnInit {
-
+  error = '';
   username: string = '';
   preferences: string = '';
   avatars = [
@@ -22,10 +25,60 @@ export class HomeComponent implements OnInit {
     '/pink_girl.png'
   ];
 
+  // modify preferences
+  isPopupOpen = false;
+  formData = {
+   preferences: ""
+  };
+
+  openPopup() {
+    this.isPopupOpen = true;
+  }
+
+  closePopup() {
+    this.isPopupOpen = false;
+  }
+
+  async onSubmit() {
+
+    if(this.formData.preferences && this.username) {
+
+      alert(`Submitted: ${this.formData.preferences}`);
+
+      const body = {
+        username: this.username,
+        preferences: this.formData.preferences
+      };
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json'
+      });
+
+      try {
+        const response: any = await firstValueFrom(
+          this.http.post(
+            'http://localhost:8080/api/users/update-preferences',
+            body,
+            { headers: headers }
+          )
+        );
+        console.log('Preferences updated - ', response);
+      }
+      catch(error)
+      {
+        console.error('Update failed', error);
+        this.error = 'Update failed. Please check your preferences and try again.';
+      }
+      this.closePopup();
+    }
+  }
+
+
+  // avatar
+
   selectedAvatar = this.avatars[0];
   avatarPickerVisible = false;
 
-  constructor(private router: Router, private userService: UserService) {
+  constructor(private router: Router, private userService: UserService,private http: HttpClient) {
     this.username = this.userService.getUsername();
     this.preferences = this.userService.getPreferences();
   }

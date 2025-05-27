@@ -49,8 +49,30 @@
         <button class="action-btn">ADD ITEM</button>
         <button class="action-btn">REMOVE ITEM</button>
         <button class="action-btn" (click)="navigateToViewItems()">VIEW ITEMS</button>
-        <button class="action-btn">MODIFY PREFERENCES</button>
+        <button class="action-btn" (click)="openPopup()">MODIFY PREFERENCES</button>
       </div>
+
+      <!-- Overlay + Popup -->
+      <div class="overlay" *ngIf="isPopupOpen" (click)="closePopup()" @fadeInOut>
+        <div class="popup" (click)="$event.stopPropagation()" @scaleInOut>
+          <h2>Input Form</h2><hr> <br>
+
+          <form (ngSubmit)="onSubmit()" #form="ngForm">
+            <label>
+              New Preferences:
+              <br> <br>
+              <input type="text" name="preferences" [(ngModel)]="formData.preferences" required />
+            </label>
+            <br />
+            <div class="buttons">
+              <button type="submit">Submit</button>
+              <button type="button2" (click)="closePopup()">Abort</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+
     </div>
 
     <!-- Tips Section with Corrected Image Paths -->

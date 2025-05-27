@@ -257,3 +257,70 @@ hr {
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+
+/* full screen overlay */
+.overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* popup window */
+.popup {
+  background-color: #1e1e1e;
+  padding: 20px 30px;
+  border-radius: 8px;
+  min-width: 300px;
+  box-shadow: 0 4px 15px #1e1e1e;
+  text-align: center;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+input[type="text"], input[type="email"] {
+  width: 100%;
+  padding: 6px 8px;
+  margin-top: 4px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.buttons {
+  margin-top: 20px;
+  text-align: right;
+}
+
+button {
+  margin-left: 10px;
+  padding: 6px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+}
+
+button[type="submit"]:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+button[type="button2"] {
+  background-color: #dc3545;
+  color: white;
+}
+
+
+
