@@ -20,7 +20,7 @@ import java.util.List;
 public class OutfitService
 {
     // token access
-    private final String TOKEN = "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";
+    private final String TOKEN = "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";
     private final String endpoint = "https://models.github.ai/inference";
     private final String model = "openai/gpt-4o-mini";
 
@@ -105,9 +105,12 @@ public class OutfitService
         // Set assistant behavior
         chatMessages.add(new ChatRequestSystemMessage("You are a helpful fashion assistant. "
                 + "Match available outfit items with the weather and user preferences. "
-                + "Respond concisely with your outfit suggestions."
-                + "The response should contain only the id of items (the part before :)."
-                + "Respect this format: id1/id2/id3/.../idn"));
+                + "Respond concisely with your outfit suggestions. "
+                + "The response should contain only the id of items (the part before :). "
+                + "Respect this format: id1/id2/id3/.../idn. "
+                + "You are not allowed to choose two items from the same category (for example two t-shirts, or two hoodies). "
+                + "Also you must choose one of the necessary items such as t-shirt or hoodie, a pair of pants, shoes, the rest are optional."
+        ));
 
         // Provide the user's wardrobe
         chatMessages.add(new ChatRequestUserMessage("These are the items in my wardrobe: " + outfitItems));
