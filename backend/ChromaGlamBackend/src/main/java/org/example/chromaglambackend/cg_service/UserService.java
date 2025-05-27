@@ -61,5 +61,15 @@ public class UserService
     {
         return userRepository.findByUsername(username);
     }
+
+    public boolean updatePreferences(String username, String preferences) {
+        User user = userRepository.findByUsername(username);
+        if (user != null) {
+            user.setPreferences(preferences);
+            userRepository.save(user);
+            return true;
+        }
+        return false;
+    }
 }
 

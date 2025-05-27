@@ -1,5 +1,7 @@
-<div class="home-container">
+<div class="animated-bg">
+  <div class="contentx">
   <header class="header">
+    <!-- logo în stânga -->
     <div class="logo">
       <span class="l1">C</span>
       <span class="l2">h</span>
@@ -13,12 +15,11 @@
       <span class="l10">m</span>
     </div>
 
+    <!-- profile în dreapta -->
     <div class="profile">
       <img [src]="selectedAvatar" alt="User Avatar" class="avatar-image" (click)="toggleAvatarPicker()">
-
       <div class="username">Hi, {{ username }}</div>
       <button class="action-btn" type="button" (click)="navigateToSignin()">SWITCH USER</button>
-
 
       <div *ngIf="avatarPickerVisible" class="avatar-picker">
         <img
@@ -32,6 +33,7 @@
     </div>
   </header>
 
+  <!-- linia -->
   <hr>
 
   <main class="main-content">
@@ -47,8 +49,30 @@
         <button class="action-btn">ADD ITEM</button>
         <button class="action-btn">REMOVE ITEM</button>
         <button class="action-btn" (click)="navigateToViewItems()">VIEW ITEMS</button>
-        <button class="action-btn">MODIFY PREFERENCES</button>
+        <button class="action-btn" (click)="openPopup()">MODIFY PREFERENCES</button>
       </div>
+
+      <!-- Overlay + Popup -->
+      <div class="overlay" *ngIf="isPopupOpen" (click)="closePopup()" @fadeInOut>
+        <div class="popup" (click)="$event.stopPropagation()" @scaleInOut>
+          <h2>Input Form</h2><hr> <br>
+
+          <form (ngSubmit)="onSubmit()" #form="ngForm">
+            <label>
+              New Preferences:
+              <br> <br>
+              <input type="text" name="preferences" [(ngModel)]="formData.preferences" required />
+            </label>
+            <br />
+            <div class="buttons">
+              <button type="submit">Submit</button>
+              <button type="button2" (click)="closePopup()">Abort</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+
     </div>
 
     <!-- Tips Section with Corrected Image Paths -->
@@ -72,4 +96,5 @@
       <img src="/clouds.png" alt="Right Tip Image" class="image-placeholder">
     </div>
   </main>
+  </div>
 </div>

@@ -1,16 +1,105 @@
 html, body {
   margin: 0;
   padding: 0;
+  position: relative;
   background-color: #121212;
   font-family: 'Segoe UI', sans-serif;
   color: white;
+}
+
+.contentx
+{
+  max-width: 1200px;
+  min-height: 150vh;
+  align-items: center;
+  padding: 4rem;
+  margin: 0 auto;
+}
+
+/* header section */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+/* action buttons */
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 200px;
+  flex-shrink: 0;
+  border-radius: 5px;
+}
+
+.action-btn {
+  background-color: transparent;
+  border: 1px solid #888;
+  color: #ccc;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-family: 'Courier New', Courier, monospace;
+  transition: background 0.3s;
+  border-radius: 5px;
+}
+
+.action-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* profile section */
+.profile {
+  text-align: center;
+}
+
+.profile-icon {
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.avatar-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid white;
+}
+
+.avatar-picker {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.avatar-option {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.avatar-option.selected {
+  border: 2px solid #00f7ff;
+}
+
+
+.username {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
 }
 
 .page-container {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
   padding: 2rem 1rem;
 }
 
@@ -18,6 +107,8 @@ html, body {
   font-size: 4rem;
   font-weight: bold;
   margin-bottom: 1.5rem;
+  text-align: center;
+  font-family: Arial, sans-serif;
 }
 
 .logo span {
@@ -60,19 +151,19 @@ html, body {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border: 1px solid #ccc;
+  border: 1px solid #808080;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   padding: 10px; /* Optional inner space */
-  background-color: #fff;
+  background-color: #808080;
 }
 
 .image-wrapper img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Use 'contain' if you prefer entire image visible */
-  background-color: #f9f9f9; /* Optional background for empty space */
+  object-fit: cover;
+  background-color: #808080; /* Optional background for empty space */
   display: block;
   transition: transform 0.3s ease;
 }
@@ -138,4 +229,67 @@ html, body {
   to {
     opacity: 1;
   }
+}
+hr {
+  border: none;
+  height: 1px;
+  background-color: #999999;
+  margin: 1rem 0;
+}
+
+
+.animated-bg {
+  height: 500vh;
+  color: white;
+  background: linear-gradient(-45deg, #020202, #000000, #051320, #00101c);
+  background-size: 400% 400%;
+  animation: gradientMove 10s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.title-with-lines {
+  position: relative;
+  text-align: center;
+  color: #999999;
+  font-size: 24px;
+  margin-bottom: 40px;
+}
+
+.title-with-lines::before,
+.title-with-lines::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 60px;
+  height: 2px;
+  background: #999999;
+}
+
+.title-with-lines::before {
+  left: 0;
+}
+
+.title-with-lines::after {
+  right: 0;
+}
+
+.typewriter {
+  font-family: Arial, sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 1px #808080;
+  text-align: center;
+  animation: blink-caret 0.75s step-end infinite;
+  color: #808080;
+}
+
+/* cursor animation */
+@keyframes blink-caret {
+  0%, 100% { border-color: #808080; }
+  50%      { border-color: transparent; }
 }

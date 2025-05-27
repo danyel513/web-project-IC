@@ -20,7 +20,7 @@ import java.util.List;
 public class OutfitService
 {
     // token access
-    private final String TOKEN = "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";
+    private final String TOKEN = "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";
     private final String endpoint = "https://models.github.ai/inference";
     private final String model = "openai/gpt-4o-mini";
 

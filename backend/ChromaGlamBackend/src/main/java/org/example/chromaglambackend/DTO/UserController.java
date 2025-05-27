@@ -47,17 +47,13 @@ public class UserController
         return success ? ResponseEntity.ok(HttpStatus.FOUND) : ResponseEntity.ok(HttpStatus.NOT_FOUND); // return the state
     }
 
-//    // UNUSED (to be verified and corrected
-//    @PutMapping(value = "/update", consumes = "application/json")
-//    public ResponseEntity<String> updateUser(@RequestBody User user)
-//    {
-//        try
-//        {
-//            User updated = userService.update(user.getUser_id(), user.getName(), user.getUsername(), user.getPassword(), user.getEmail());
-//            return ResponseEntity.ok(updated.toString());
-//        }catch (RuntimeException e)
-//        {
-//            return ResponseEntity.status(404).body("User not found.");
-//        }
-//    }
+    @PostMapping(value = "/update-preferences", consumes = "application/json")
+    public ResponseEntity<HttpStatus> updatePreferences(@RequestBody UpdatePreferencesRequest request) {
+        boolean updated = userService.updatePreferences(request.getUsername(), request.getPreferences());
+        if (updated) {
+            return ResponseEntity.ok(HttpStatus.OK);
+        } else {
+            return ResponseEntity.ok(HttpStatus.NOT_FOUND);
+        }
+    }
 }
