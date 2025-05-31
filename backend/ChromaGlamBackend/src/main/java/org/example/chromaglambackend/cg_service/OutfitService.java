@@ -15,12 +15,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OutfitService
 {
     // token access
-    private final String TOKEN = "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";
+    private final String TOKEN = "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";
     private final String endpoint = "https://models.github.ai/inference";
     private final String model = "openai/gpt-4o-mini";
 
@@ -53,21 +54,6 @@ public class OutfitService
             }
         }
         return image;
-    }
-  
-    public Outfit getBestOutfit()
-    {
-        return new Outfit();
-    }
-
-    public Outfit getOldOutfit()
-    {
-        return new Outfit();
-    }
-
-    public Outfit getOtherOutfit()
-    {
-        return new Outfit();
     }
 
    public String askFashionAdvice(String preferences)
@@ -134,5 +120,18 @@ public class OutfitService
         // Output response
         String reply = response.getChoice().getMessage().getContent();
         return reply;
+    }
+
+    public boolean toggleAvailabilityById(long id) {
+        Optional<Outfit> optionalOutfit = Optional.ofNullable(outfitRepository.findById(id));
+        if (optionalOutfit.isPresent()) {
+            Outfit outfit = optionalOutfit.get();
+            int current = outfit.getAvailable();
+            outfit.setAvailable(current == 1 ? 0 : 1); // if true -> false and if false -> true
+            outfitRepository.save(outfit);
+            return true;
+        }
+
+        return false;
     }
 }

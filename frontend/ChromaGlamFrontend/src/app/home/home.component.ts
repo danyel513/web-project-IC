@@ -78,10 +78,14 @@ export class HomeComponent implements OnInit {
   selectedAvatar = this.avatars[0];
   avatarPickerVisible = false;
 
+
+  // constructor
   constructor(private router: Router, private userService: UserService,private http: HttpClient) {
     this.username = this.userService.getUsername();
     this.preferences = this.userService.getPreferences();
   }
+
+
 
   ngOnInit(): void {
     const savedAvatar = localStorage.getItem('userAvatar');

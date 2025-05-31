@@ -1,112 +1,295 @@
-.view-items-container {
-  background-color: #121212;
-  color: #e0e0e0;
-  min-height: 100vh;
-  max-width: 1200px;
-  padding: 3rem 4rem;
+.animated-bg {
+  padding: 4rem;
   margin: 0 auto;
   font-family: 'Courier New', Courier, monospace;
+  color: white;
+  background: linear-gradient(-45deg, #020202, #000000, #051320, #00101c);
+  background-size: 400% 400%;
+  animation: gradientMove 10s ease infinite;
 }
 
-.page-title {
-  font-size: 3rem;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-  color: #66b2ff;
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.contentx {
+  max-width: 1200px;
+  align-items: center;
+  padding: 4rem;
+  margin: 0 auto;
 }
 
 hr {
   border: none;
   height: 1px;
   background-color: gray;
-  margin: 1rem 0 2rem 0;
+  margin: 1rem 0;
 }
 
-.loading-text,
-.error-text,
-.no-items {
-  text-align: center;
-  font-size: 1.2rem;
-  margin-top: 2rem;
-  color: #ccc;
-}
-
-.error-text {
-  color: #ff5555;
-}
-
-.outfits-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 2rem;
-}
-
-.outfit-card {
-  background-color: #1e1e1e;
-  border: 1px solid #555;
-  border-radius: 8px;
-  padding: 1rem;
+.header {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  transition: box-shadow 0.3s;
-  cursor: default;
+}
+
+.logo {
+  font-size: 4rem;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+}
+
+.logo p{
+  font-size: 1.5rem;
+  color: #B3B3B3;
+}
+
+.logo span {
+  display: inline-block;
+  transition: transform 0.3s;
+}
+
+.logo span:hover {
+  transform: scale(1.2);
+}
+
+.logo .l1 { color: #99CCFF; }
+.logo .l2 { color: #66B2FF; }
+.logo .l3 { color: #3399FF; }
+.logo .l4 { color: #007FFF; }
+.logo .l5 { color: #004C99; }
+.logo .l6 { color: #004C99; }
+.logo .l7 { color: #808080; }
+.logo .l8 { color: #808080; }
+.logo .l9 { color: #999999; }
+.logo .l10 { color: #B3B3B3; }
+
+.profile {
+  text-align: center;
+}
+
+.avatar-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid white;
+}
+
+.avatar-picker {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.avatar-option {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.avatar-option.selected {
+  border: 2px solid #00f7ff;
+}
+
+.username {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.action-btn {
+  background-color: transparent;
+  border: 1px solid #888;
+  color: #ccc;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-family: 'Courier New', Courier, monospace;
+  transition: background 0.3s;
+  border-radius: 5px;
+}
+
+.action-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+
+
+/* gallery */
+
+/* container general pentru galerie */
+.gallery-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 30px;
+}
+
+/* card individual pentru fiecare outfit */
+.outfit-card {
+  width: 250px;
+  border-radius: 15px;
+  background-color: #1e293b;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .outfit-card:hover {
-  box-shadow: 0 0 10px #2196f3;
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
 }
 
+/* imaginea outfitului */
 .outfit-image {
   width: 100%;
-  height: 200px;
+  height: 250px;
   object-fit: cover;
-  border-radius: 5px;
-  border: 1px solid #444;
-  margin-bottom: 1rem;
+  display: block;
 }
 
-.no-image {
-  width: 100%;
-  height: 200px;
-  background-color: #333;
-  color: #888;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 5px;
-  margin-bottom: 1rem;
-  font-style: italic;
-}
-
+/* container text: descriere + disponibilitate */
 .outfit-info {
-  width: 100%;
+  padding: 15px;
+  color: #ffffff;
   text-align: center;
 }
 
+/* descrierea */
 .description {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 10px;
 }
 
-.style {
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
-}
-
-.blue {
-  color: #2196f3;
-}
-
+/* text disponibilitate */
 .availability {
+  font-size: 14px;
   font-weight: bold;
-  font-size: 0.9rem;
+}
+
+/* culoare verde pentru available */
+.available {
+  color: #4caf50;
+}
+
+/* culoare roșie pentru not available */
+.notAvailable {
+  color: #f44336;
+}
+
+
+.toggle-button {
+  padding: 8px 16px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: #007bff; /* albastru */
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-button:hover {
+  background-color: #0056b3; /* hover mai închis */
 }
 
 .available {
-  color: #66ff66;
+  color: #28a745; /* verde */
+  font-weight: bold;
 }
 
-.unavailable {
-  color: #ff6666;
+.notAvailable {
+  color: #dc3545; /* roșu */
+  font-weight: bold;
+}
+
+
+/*info text box*/
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap');
+
+.info-container {
+  margin: 30px auto;
+  padding: 20px;
+  max-width: 800px;
+  border-radius: 15px;
+  background-color: #1e293b; /* dark blue-gray */
+  color: #e2e8f0; /* soft light grey */
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  cursor: default;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.info-container:hover {
+  transform: scale(1.02);
+  background-color: #334155; /* slightly lighter on hover */
+}
+
+.info-text {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+
+/*Sort by*/
+
+.sort-container {
+  display: flex;
+  justify-content: left;
+  margin-top: 20px;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.sort-container button {
+  background-color: transparent;
+  border: 1px solid #888;
+  color: #ccc;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.sort-container .static-button:hover{
+  background-color:transparent;
+}
+
+.sort-container .button1 {
+  background-color: rgba(76, 175, 80, 0.42);
+  border: 1px solid #888;
+  color: #ccc;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.sort-container .button1:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sort-container .button2 {
+  background-color: rgba(220, 53, 69, 0.37);
+  border: 1px solid #888;
+  color: #ccc;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.sort-container .button2:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }

@@ -1,37 +1,82 @@
-<div class="view-items-container">
-  <h1 class="page-title">Available Outfits</h1>
-  <hr />
+<div class="animated-bg">
+  <div class="contentx">
+    <header class="header">
+      <!-- logo în stânga -->
+      <div class="logo">
+        <span class="l1">C</span>
+        <span class="l2">h</span>
+        <span class="l3">r</span>
+        <span class="l4">o</span>
+        <span class="l5">m</span>
+        <span class="l6">a</span>
+        <span class="l7">G</span>
+        <span class="l8">l</span>
+        <span class="l9">a</span>
+        <span class="l10">m</span>
 
-  <div *ngIf="loading" class="loading-text">Loading outfits...</div>
-  <div *ngIf="error" class="error-text">{{ error }}</div>
+        <p> Visualize all available items.</p>
+      </div>
 
-  <div class="outfits-grid" *ngIf="!loading && !error && outfits.length > 0">
-    <div class="outfit-card" *ngFor="let outfit of outfits">
-      <img
-        class="outfit-image"
-        [src]="outfit.image"
-        alt="Outfit Image"
-        *ngIf="outfit.image; else noImage"
-      />
-      <ng-template #noImage>
-        <div class="no-image">No Image</div>
-      </ng-template>
+      <!-- profil în dreapta -->
+      <div class="profile">
+        <img [src]="selectedAvatar" alt="User Avatar" class="avatar-image" (click)="toggleAvatarPicker()">
+        <div class="username">Hi, {{ username }}</div>
+        <button class="action-btn" type="button" (click)="navigateToSignin()">SWITCH USER</button>
 
-      <div class="outfit-info">
-        <p class="description">{{ outfit.description }}</p>
-        <p class="style">Style: <span class="blue">{{ outfit.style }}</span></p>
-        <p
-          class="availability"
-          [class.available]="outfit.available"
-          [class.unavailable]="!outfit.available"
-        >
-          {{ outfit.available ? 'Available' : 'Unavailable' }}
-        </p>
+        <div *ngIf="avatarPickerVisible" class="avatar-picker">
+          <img
+            *ngFor="let avatar of avatars"
+            [src]="avatar"
+            class="avatar-option"
+            [class.selected]="avatar === selectedAvatar"
+            (click)="selectAvatar(avatar); $event.stopPropagation()"
+            alt="Avatar option">
+        </div>
+      </div>
+    </header>
+    <br><br>
+    <hr>
+    <br><br>
+    <div class="info-container">
+      <p class="info-text">
+        This gallery showcases all your saved outfits.
+      </p>
+      <p class="info-text">
+        TIPS: Below each image, you'll find its description and availability status.
+        Use the blue-grey button under any image to toggle its availability.
+      </p>
+    </div>
+    <br>
+
+    <div class="sort-container">
+      <button class="static-button">Choose a sorting option</button>
+      <button class="button1" (click)="sortByAvailability()">Available items first</button>
+      <button class="button2" (click)="sortByUnavailability()">Unavailable items first</button>
+    </div>
+
+
+    <br>
+    <div class="gallery-container">
+      <div class="outfit-card" *ngFor="let item of outfitsToDisplay">
+        <img [src]="item.imageUrl" alt="Outfit image" class="outfit-image" />
+        <div class="outfit-info">
+          <p class="description">{{ item.outfit.description }}</p>
+          <p
+            class="availability"
+            [ngClass]="{
+          available: item.outfit.available === 1,
+          notAvailable: item.outfit.available === 0
+        }"
+          >
+            {{ item.outfit.available === 1 ? 'Available' : 'Not available' }}
+          </p>
+          <button class="toggle-button" (click)="toggleAvailability(item)">
+            {{ item.outfit.available === 1 ? 'Mark Unavailable' : 'Mark Available' }}
+          </button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div *ngIf="!loading && !error && outfits.length === 0" class="no-items">
-    No outfits to display.
+
   </div>
 </div>
