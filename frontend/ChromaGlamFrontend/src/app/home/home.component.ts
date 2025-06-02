@@ -73,6 +73,42 @@ export class HomeComponent implements OnInit {
   }
 
 
+  // add item
+  isAddItemPopupOpen = false;
+  uploadSuccess = false;
+  selectedFile: File | null = null;
+
+  openAddItemPopup() {
+    this.isAddItemPopupOpen = true;
+    this.uploadSuccess = false;
+  }
+
+  closeAddItemPopup() {
+    this.isAddItemPopupOpen = false;
+    this.selectedFile = null;
+  }
+
+  onFileSelected(event: Event) {
+    const fileInput = event.target as HTMLInputElement;
+    if (fileInput.files && fileInput.files.length > 0) {
+      this.selectedFile = fileInput.files[0];
+    }
+  }
+
+  onImageUpload() {
+    if (this.selectedFile) {
+      console.log('Uploading image:', this.selectedFile.name);
+
+      // Simulate image upload
+      this.uploadSuccess = true;
+
+      // Optional reset
+      setTimeout(() => {
+        this.selectedFile = null;
+      }, 1000);
+    }
+  }
+
   // avatar
 
   selectedAvatar = this.avatars[0];
