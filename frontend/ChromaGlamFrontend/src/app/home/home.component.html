@@ -1,100 +1,121 @@
 <div class="animated-bg">
   <div class="contentx">
-  <header class="header">
-    <!-- logo în stânga -->
-    <div class="logo">
-      <span class="l1">C</span>
-      <span class="l2">h</span>
-      <span class="l3">r</span>
-      <span class="l4">o</span>
-      <span class="l5">m</span>
-      <span class="l6">a</span>
-      <span class="l7">G</span>
-      <span class="l8">l</span>
-      <span class="l9">a</span>
-      <span class="l10">m</span>
-    </div>
-
-    <!-- profile în dreapta -->
-    <div class="profile">
-      <img [src]="selectedAvatar" alt="User Avatar" class="avatar-image" (click)="toggleAvatarPicker()">
-      <div class="username">Hi, {{ username }}</div>
-      <button class="action-btn" type="button" (click)="navigateToSignin()">SWITCH USER</button>
-
-      <div *ngIf="avatarPickerVisible" class="avatar-picker">
-        <img
-          *ngFor="let avatar of avatars"
-          [src]="avatar"
-          class="avatar-option"
-          [class.selected]="avatar === selectedAvatar"
-          (click)="selectAvatar(avatar); $event.stopPropagation()"
-          alt="Avatar option">
-      </div>
-    </div>
-  </header>
-
-  <!-- linia -->
-  <hr>
-
-  <main class="main-content">
-    <div class="home-content">
-      <div class="welcome-text">
-        <i>Welcome back, {{ username }}!</i>
-        <p>What would you like to wear today?</p>
-        <button class="see-outfits-btn" type="button" (click)="navigateToRecommendations()">SEE OUTFITS</button>
-        <p class="instruction-text">Click the button to see the recommended outfits for the day.</p>
+    <header class="header">
+      <!-- logo în stânga -->
+      <div class="logo">
+        <span class="l1">C</span>
+        <span class="l2">h</span>
+        <span class="l3">r</span>
+        <span class="l4">o</span>
+        <span class="l5">m</span>
+        <span class="l6">a</span>
+        <span class="l7">G</span>
+        <span class="l8">l</span>
+        <span class="l9">a</span>
+        <span class="l10">m</span>
       </div>
 
-      <div class="action-buttons">
-        <button class="action-btn">ADD ITEM</button>
-        <button class="action-btn">REMOVE ITEM</button>
-        <button class="action-btn" (click)="navigateToViewItems()">VIEW ITEMS</button>
-        <button class="action-btn" (click)="openPopup()">MODIFY PREFERENCES</button>
-      </div>
+      <!-- profile în dreapta -->
+      <div class="profile">
+        <img [src]="selectedAvatar" alt="User Avatar" class="avatar-image" (click)="toggleAvatarPicker()">
+        <div class="username">Hi, {{ username }}</div>
+        <button class="action-btn" type="button" (click)="navigateToSignin()">SWITCH USER</button>
 
-      <!-- Overlay + Popup -->
-      <div class="overlay" *ngIf="isPopupOpen" (click)="closePopup()" @fadeInOut>
-        <div class="popup" (click)="$event.stopPropagation()" @scaleInOut>
-          <h2>Input Form</h2><hr> <br>
-
-          <form (ngSubmit)="onSubmit()" #form="ngForm">
-            <label>
-              New Preferences:
-              <br> <br>
-              <input type="text" name="preferences" [(ngModel)]="formData.preferences" required />
-            </label>
-            <br />
-            <div class="buttons">
-              <button type="submit">Submit</button>
-              <button type="button2" (click)="closePopup()">Abort</button>
-            </div>
-          </form>
+        <div *ngIf="avatarPickerVisible" class="avatar-picker">
+          <img
+            *ngFor="let avatar of avatars"
+            [src]="avatar"
+            class="avatar-option"
+            [class.selected]="avatar === selectedAvatar"
+            (click)="selectAvatar(avatar); $event.stopPropagation()"
+            alt="Avatar option">
         </div>
       </div>
+    </header>
 
+    <!-- linia -->
+    <hr>
 
-    </div>
+    <main class="main-content">
+      <div class="home-content">
+        <div class="welcome-text">
+          <i>Welcome back, {{ username }}!</i>
+          <p>What would you like to wear today?</p>
+          <button class="see-outfits-btn" type="button" (click)="navigateToRecommendations()">SEE OUTFITS</button>
+          <p class="instruction-text">Click the button to see the recommended outfits for the day.</p>
+        </div>
 
-    <!-- Tips Section with Corrected Image Paths -->
-    <div class="tips-section">
-      <img src="/coffee_meme.png" alt="Left Tip Image" class="image-placeholder">
+        <div class="action-buttons">
+          <button class="action-btn" (click)="openAddItemPopup()">ADD ITEM</button>
+          <button class="action-btn">REMOVE ITEM</button>
+          <button class="action-btn" (click)="navigateToViewItems()">VIEW ITEMS</button>
+          <button class="action-btn" (click)="openPopup()">MODIFY PREFERENCES</button>
+        </div>
 
-      <div class="tips-box">
-        <div class="tips-title">Tips of the day</div>
-        <hr>
-        <div class="tips-content">
-          <button class="arrow-btn" type="button" (click)="prevTip()">&#8592;</button>
+        <!-- Modify Preferences Popup -->
+        <div class="overlay" *ngIf="isPopupOpen" (click)="closePopup()" @fadeInOut>
+          <div class="popup" (click)="$event.stopPropagation()" @scaleInOut>
+            <h2>Input Form</h2><hr> <br>
 
-          <div class="tips-text">
-            {{ tips[currentTipIndex] }}
+            <form (ngSubmit)="onSubmit()" #form="ngForm">
+              <label>
+                New Preferences:
+                <br> <br>
+                <input type="text" name="preferences" [(ngModel)]="formData.preferences" required />
+              </label>
+              <br />
+              <div class="buttons">
+                <button type="submit">Submit</button>
+                <button type="button2" (click)="closePopup()">Abort</button>
+              </div>
+            </form>
           </div>
-
-          <button type="button" class="arrow-btn" (click)="nextTip()">&#8594;</button>
         </div>
+
+        <!-- Add Item Popup -->
+        <div class="overlay" *ngIf="isAddItemPopupOpen" (click)="closeAddItemPopup()" @fadeInOut>
+          <div class="popup" (click)="$event.stopPropagation()" @scaleInOut>
+            <h2>Add New Item</h2><hr><br>
+
+            <form (ngSubmit)="onImageUpload()" #imageForm="ngForm">
+              <label>
+                Add here your image:
+                <br><br>
+                <input type="file" (change)="onFileSelected($event)" required />
+              </label>
+              <br><br>
+              <div class="buttons">
+                <button type="submit">Upload Image</button>
+                <button type="button" (click)="closeAddItemPopup()">Cancel</button>
+              </div>
+            </form>
+
+            <p *ngIf="uploadSuccess" class="success-message">Image uploaded successfully!</p>
+          </div>
+        </div>
+
       </div>
 
-      <img src="/clouds.png" alt="Right Tip Image" class="image-placeholder">
-    </div>
-  </main>
+      <!-- Tips Section with Corrected Image Paths -->
+      <div class="tips-section">
+        <img src="/coffee_meme.png" alt="Left Tip Image" class="image-placeholder">
+
+        <div class="tips-box">
+          <div class="tips-title">Tips of the day</div>
+          <hr>
+          <div class="tips-content">
+            <button class="arrow-btn" type="button" (click)="prevTip()">&#8592;</button>
+
+            <div class="tips-text">
+              {{ tips[currentTipIndex] }}
+            </div>
+
+            <button type="button" class="arrow-btn" (click)="nextTip()">&#8594;</button>
+          </div>
+        </div>
+
+        <img src="/clouds.png" alt="Right Tip Image" class="image-placeholder">
+      </div>
+    </main>
   </div>
 </div>
